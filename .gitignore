@@ -1,0 +1,9 @@
+# Backend runtime binary
+backend/rr.exe
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

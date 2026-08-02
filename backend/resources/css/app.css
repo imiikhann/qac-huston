@@ -1,0 +1,308 @@
+/* QAC Filament Admin - Glass Design Theme */
+/* Only uses valid Filament v5 CSS class selectors */
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --amber: #FF9000;
+  --qac-dark: #313639;
+  --sidebar-bg: rgba(255, 255, 255, 0.85);
+}
+
+.dark {
+  --glass-bg: rgba(30, 35, 40, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --sidebar-bg: rgba(25, 30, 35, 0.92);
+}
+
+/* Sidebar */
+.fi-sidebar {
+  background: var(--sidebar-bg) !important;
+  backdrop-filter: blur(20px) !important;
+  border-right: 1px solid var(--glass-border) !important;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.04) !important;
+}
+
+.dark .fi-sidebar-item-label {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.dark .fi-sidebar-group-label {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.fi-sidebar-header {
+  border-bottom: 1px solid var(--glass-border) !important;
+}
+
+.fi-sidebar-nav {
+  background: transparent !important;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+  background: linear-gradient(135deg, #FF9000, #fb923c) !important;
+  box-shadow: 0 4px 12px rgba(255, 144, 0, 0.3) !important;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
+  color: white !important;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-label {
+  color: white !important;
+}
+
+.fi-sidebar-item.fi-sidebar-item-has-url > .fi-sidebar-item-btn:hover {
+  background: rgba(255, 144, 0, 0.08) !important;
+}
+
+.dark .fi-sidebar-item.fi-sidebar-item-has-url > .fi-sidebar-item-btn:hover {
+  background: rgba(255, 144, 0, 0.15) !important;
+}
+
+.fi-sidebar-item-btn {
+  border-radius: 10px !important;
+  margin: 2px 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.fi-sidebar-item-label {
+  font-weight: 500 !important;
+}
+
+/* Topbar */
+.fi-topbar {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* Main content */
+.fi-main {
+  background: linear-gradient(135deg, #f7f7f8 0%, #ffffff 50%, #fff7ed 100%) !important;
+}
+
+.dark .fi-main {
+  background: linear-gradient(135deg, #1a1d21 0%, #22272d 50%, #1e1f1a 100%) !important;
+}
+
+/* Text colors in dark mode */
+.dark .fi-main,
+.dark .fi-sidebar {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dark .fi-main .fi-section-content,
+.dark .fi-main .fi-sc-section,
+.dark .fi-main .fi-card {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Login page */
+.fi-simple-layout {
+  background: linear-gradient(135deg, #f7f7f8 0%, #ffffff 50%, #fff7ed 100%) !important;
+}
+
+.dark .fi-simple-layout {
+  background: linear-gradient(135deg, #1a1d21 0%, #22272d 50%, #1e1f1a 100%) !important;
+}
+
+.fi-simple-card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(24px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Account widget */
+.fi-account-widget .fi-sc-section-label-ctn {
+  display: none !important;
+}
+
+.fi-account-widget-heading {
+  color: var(--qac-dark) !important;
+  font-weight: 700 !important;
+}
+
+.dark .fi-account-widget-heading {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.fi-account-widget-user-name {
+  color: var(--amber) !important;
+}
+
+/* General glass styling */
+.fi-section-content {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* Stats overview widget cards */
+.dark .fi-section-content .fi-sc-section {
+  background: rgba(35, 40, 48, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 14px !important;
+}
+
+.dark .fi-section-content .fi-sc-section .fi-sc-section-label-ctn .fi-sc-section-label {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dark .fi-section-content .fi-sc-section .fi-sc-section-description {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Generic element styling within main */
+.fi-main input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+.fi-main select,
+.fi-main textarea {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 10px !important;
+  transition: all 0.2s ease !important;
+}
+
+.dark .fi-main input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+.dark .fi-main select,
+.dark .fi-main textarea {
+  background: rgba(35, 40, 48, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.fi-main input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):focus,
+.fi-main select:focus,
+.fi-main textarea:focus {
+  border-color: var(--amber) !important;
+  box-shadow: 0 0 0 3px rgba(255, 144, 0, 0.15) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dark .fi-main input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):focus,
+.dark .fi-main select:focus,
+.dark .fi-main textarea:focus {
+  background: rgba(45, 52, 62, 0.9) !important;
+  border-color: var(--amber) !important;
+  box-shadow: 0 0 0 3px rgba(255, 144, 0, 0.25) !important;
+}
+
+/* Table styling within main */
+.fi-main table {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.fi-main table thead {
+  background: rgba(49, 54, 57, 0.03) !important;
+}
+
+.dark .fi-main table thead {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.dark .fi-main table thead th {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.dark .fi-main table tbody td {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.fi-main table tbody tr:hover {
+  background: rgba(255, 144, 0, 0.03) !important;
+}
+
+.dark .fi-main table tbody tr:hover {
+  background: rgba(255, 144, 0, 0.08) !important;
+}
+
+/* Dark mode section/dropdown/panel overrides */
+.dark .fi-sc-section {
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark .fi-sc-section-label {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.dark .fi-sc-section-description {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* Tabs in dark mode */
+.dark .fi-tabs {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Dropdown / Modal dark mode */
+.dark .fi-dropdown-panel {
+  background: rgba(30, 35, 42, 0.98) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .fi-modal-window {
+  background: rgba(30, 35, 42, 0.98) !important;
+}
+
+/* Badge colors */
+.dark .fi-badge {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Heading text */
+.dark h1, .dark h2, .dark h3, .dark h4,
+.dark .fi-section-heading,
+.dark .fi-modal-heading {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Buttons */
+.dark .fi-btn:not(.fi-btn-color-primary):not(.fi-btn-color-danger) {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.dark .fi-btn:not(.fi-btn-color-primary):not(.fi-btn-color-danger):hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Pagination */
+.dark .fi-pagination-item button {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dark .fi-pagination-item.fi-active button {
+  background: var(--amber) !important;
+  color: white !important;
+}
+
+/* Links */
+.dark a:not(.fi-btn) {
+  color: #fb923c !important;
+}
+
+/* Sidebar footer / user menu */
+.dark .fi-sidebar-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Breadcrumbs */
+.dark .fi-breadcrumbs {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Input labels */
+.dark .fi-field-label {
+  color: rgba(255, 255, 255, 0.75) !important;
+}

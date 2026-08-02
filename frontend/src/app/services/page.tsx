@@ -1,0 +1,71 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { api, Service } from '@/lib/api'
+import { WrenchIcon, BoltIcon, SparklesIcon } from '@heroicons/react/24/outline'
+
+const categoryIcons: Record<string, any> = { electrical: BoltIcon, mechanical: WrenchIcon, special: SparklesIcon }
+const categoryLabels: Record<string, string> = { electrical: 'Electrical', mechanical: 'Mechanical', special: 'Special' }
+
+export default function ServicesPage() {
+  const [services, setServices] = useState<Service[]>([])
+  const [activeCategory, setActiveCategory] = useState('electrical')
+
+  useEffect(() => {
+    api.services.list().then((res) => setServices(res.data)).catch(() => {})
+  }, [])
+
+  const categories = ['electrical', 'mechanical', 'special']
+  const filteredServices = services.filter((s) => s.category === activeCategory)
+
+  return (
+    <>
+      <section className="bg-qac-50 py-16 lg:py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 mb-4">Our Services</h1>
+          <p className="text-xl text-qac-500 max-w-2xl mx-auto">
+            We specialize in electrical, mechanical, and special services on domestic and foreign vehicles, fleet trucks, motor homes, and food trucks.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center gap-2 mb-10">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-6 py-3 rounded-lg font-medium text-sm capitalize transition-all ${
+                  activeCategory === cat
+                    ? 'bg-qac-900 text-white shadow-lg'
+                    : 'bg-qac-100 text-qac-600 hover:bg-qac-200'
+                }`}
+              >
+                {categoryLabels[cat]}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredServices.map((service) => {
+              const Icon = categoryIcons[service.category] || WrenchIcon
+              return (
+                <div key={service.id} className="card group hover:border-amber-200">
+                  <div className="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-amber-100 transition-colors">
+                    <Icon className="w-6 h-6 text-amber-600" />
+                  </div>
+                  <h3 className="font-semibold text-qac-900 text-lg mb-2">{service.name}</h3>
+                  <p className="text-sm text-qac-500 mb-4">{service.description}</p>
+                  {service.price_range && (
+                    <span className="tag-amber text-xs">{service.price_range}</span>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
