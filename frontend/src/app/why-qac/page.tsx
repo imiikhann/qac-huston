@@ -30,16 +30,26 @@ export default function WhyQACPage() {
 
       <section className="py-16 lg:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reasons.map((reason, i) => (
-              <div key={i} className="card">
-                <div className="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-amber-600 font-bold">{String(i + 1).padStart(2, '0')}</span>
-                </div>
-                <h3 className="font-semibold text-qac-900 mb-2">{reason.title}</h3>
-                <p className="text-sm text-qac-500">{reason.desc}</p>
-              </div>
-            ))}
+          <div className="relative">
+            <div className="absolute left-5 sm:left-1/2 top-0 bottom-0 w-0.5 bg-amber-gradient -translate-x-1/2" aria-hidden="true" />
+            <div className="space-y-8">
+              {reasons.map((reason, i) => {
+                const left = i % 2 === 0
+                return (
+                  <div key={i} className={`relative flex items-start gap-6 sm:gap-0 ${left ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
+                    <div className="absolute left-5 sm:left-1/2 -translate-x-1/2 top-8 sm:top-9 w-10 h-10 rounded-full bg-amber-gradient text-white font-bold flex items-center justify-center shadow-lg shadow-amber-500/20 z-10 ring-4 ring-white dark:ring-qac-900">
+                      {i + 1}
+                    </div>
+                    <div className={`w-full sm:w-1/2 pl-14 sm:pl-0 ${left ? 'sm:pr-14' : 'sm:pl-14'}`}>
+                      <div className="card hover:shadow-xl hover:shadow-qac-900/5 transition-shadow">
+                        <h3 className="font-semibold text-qac-900 mb-2">{reason.title}</h3>
+                        <p className="text-sm text-qac-500">{reason.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       </section>

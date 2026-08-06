@@ -76,6 +76,7 @@ export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('electrical')
   const [activeClientele, setActiveClientele] = useState('individual')
   const [activeIndex, setActiveIndex] = useState(0)
+  const [reviewIndex, setReviewIndex] = useState(0)
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map())
 
@@ -100,7 +101,6 @@ export default function HomePage() {
     : [
         { bg: 'https://qachouston.com/wp-content/uploads/2025/02/456B13C3-C5BF-448D-BA70-2A633D929A0B.jpg', title: 'Over 10 Years Of Quality Auto Service', subtitle: 'Service', cta_text: 'BOOK NOW', cta_link: '/book' },
         { bg: 'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_2.jpg', title: 'Over 10 Years Of Quality Auto Service', subtitle: 'Service', cta_text: 'BOOK NOW', cta_link: '/book' },
-        { bg: 'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_3.jpg', title: 'Over 10 Years Of Quality Auto Service', subtitle: 'Service', cta_text: 'BOOK NOW', cta_link: '/book' },
         { bg: 'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_4.jpg', title: 'Over 10 Years Of Quality Auto Service', subtitle: 'Service', cta_text: 'BOOK NOW', cta_link: '/book' },
         { bg: 'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_5.jpg', title: 'Over 10 Years Of Quality Auto Service', subtitle: 'Service', cta_text: 'BOOK NOW', cta_link: '/book' },
         { bg: 'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_6.jpg', title: 'Over 10 Years Of Quality Auto Service', subtitle: 'Service', cta_text: 'BOOK NOW', cta_link: '/book' },
@@ -142,6 +142,18 @@ export default function HomePage() {
     }, 5000)
     return () => clearInterval(timer)
   }, [heroSlides.length])
+
+  useEffect(() => {
+    const total = reviews.length + 1
+    const timer = setInterval(() => {
+      setReviewIndex(i => (i + 1) % Math.max(1, total))
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [reviews.length])
+
+  useEffect(() => {
+    setReviewIndex(i => Math.min(i, Math.max(0, reviews.length)))
+  }, [reviews.length])
 
   useEffect(() => {
     setActiveIndex(i => Math.min(i, heroSlides.length - 1))
@@ -454,31 +466,71 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reviews.map((review, i) => (
-              <div key={review.id} className="glass-card-hover p-6" style={{ animationDelay: `${i * 80}ms` }}>
-                <div className="flex items-center gap-1 mb-4">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <StarIcon key={j} className={`w-4 h-4 ${j < review.rating ? 'text-amber-400 fill-amber-400' : 'text-qac-200 dark:text-qac-700'}`} />
-                  ))}
-                </div>
-                <p className="text-sm text-qac-700 dark:text-qac-300 mb-4 line-clamp-4 leading-relaxed">&ldquo;{review.comment}&rdquo;</p>
-                <div className="flex items-center gap-3 pt-3 border-t border-qac-100 dark:border-white/10">
-                  <div className="w-9 h-9 rounded-full bg-amber-gradient flex items-center justify-center text-white text-sm font-bold">
-                    {review.customer_name.charAt(0)}
+          <div className="relative max-w-3xl mx-auto">
+            <div className="overflow-hidden rounded-2xl">
+              <div
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateX(-${reviewIndex * 100}%)` }}
+              >
+                {reviews.map((review) => (
+                  <div key={review.id} className="w-full shrink-0 px-1">
+                    <div className="glass-card p-8 mx-2">
+                      <div className="flex items-center justify-center gap-1 mb-4">
+                        {Array.from({ length: 5 }).map((_, j) => (
+                          <StarIcon key={j} className={`w-5 h-5 ${j < review.rating ? 'text-amber-400 fill-amber-400' : 'text-qac-200 dark:text-qac-700'}`} />
+                        ))}
+                      </div>
+                      <p className="text-center text-qac-700 dark:text-qac-300 mb-6 leading-relaxed">&ldquo;{review.comment}&rdquo;</p>
+                      <div className="flex items-center justify-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-amber-gradient flex items-center justify-center text-white text-sm font-bold">
+                          {review.customer_name.charAt(0)}
+                        </div>
+                        <p className="font-semibold text-qac-900 dark:text-white text-sm">{review.customer_name}</p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="font-semibold text-qac-900 dark:text-white text-sm">{review.customer_name}</p>
+                ))}
+                <div className="w-full shrink-0 px-1">
+                  <div className="glass-card p-8 mx-2 flex flex-col items-center justify-center text-center min-h-full">
+                    <div className="w-16 h-16 bg-gradient-to-br from-qac-100 to-qac-200 dark:from-qac-800 dark:to-qac-700 rounded-2xl flex items-center justify-center mb-4">
+                      <StarIcon className="w-8 h-8 text-amber-500" />
+                    </div>
+                    <p className="text-qac-500 dark:text-qac-400 text-sm mb-4">Share your experience</p>
+                    <a href="https://search.google.com/local/writereview?placeid=ChIJsbVw5J7RQIYRGK3jJfimU8g" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm">
+                      Write a Review
+                    </a>
+                  </div>
                 </div>
               </div>
-            ))}
-            <div className="glass-card p-6 flex flex-col items-center justify-center text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-qac-100 to-qac-200 dark:from-qac-800 dark:to-qac-700 rounded-2xl flex items-center justify-center mb-4">
-                <StarIcon className="w-8 h-8 text-amber-500" />
-              </div>
-              <p className="text-qac-500 dark:text-qac-400 text-sm mb-4">Share your experience</p>
-              <a href="https://search.google.com/local/writereview?placeid=ChIJsbVw5J7RQIYRGK3jJfimU8g" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm">
-                Write a Review
-              </a>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setReviewIndex(i => (i - 1 + Math.max(1, reviews.length + 1)) % Math.max(1, reviews.length + 1))}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-white dark:bg-qac-800 shadow-lg flex items-center justify-center text-qac-700 dark:text-qac-300 hover:bg-amber-gradient hover:text-white transition-colors"
+              aria-label="Previous review"
+            >
+              <ChevronRightIcon className="w-5 h-5 rotate-180" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setReviewIndex(i => (i + 1) % Math.max(1, reviews.length + 1))}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-white dark:bg-qac-800 shadow-lg flex items-center justify-center text-qac-700 dark:text-qac-300 hover:bg-amber-gradient hover:text-white transition-colors"
+              aria-label="Next review"
+            >
+              <ChevronRightIcon className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center justify-center gap-2 mt-8">
+              {Array.from({ length: reviews.length + 1 }).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setReviewIndex(i)}
+                  className={`h-2 rounded-full transition-all duration-300 ${i === reviewIndex ? 'w-8 bg-amber-gradient' : 'w-2 bg-qac-200 dark:bg-qac-700 hover:bg-qac-300 dark:hover:bg-qac-600'}`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
             </div>
           </div>
 

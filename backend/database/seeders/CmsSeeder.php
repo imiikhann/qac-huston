@@ -36,7 +36,6 @@ class CmsSeeder extends Seeder
         $heroImages = [
             'https://qachouston.com/wp-content/uploads/2025/02/456B13C3-C5BF-448D-BA70-2A633D929A0B.jpg',
             'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_2.jpg',
-            'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_3.jpg',
             'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_4.jpg',
             'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_5.jpg',
             'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_6.jpg',
@@ -120,7 +119,7 @@ class CmsSeeder extends Seeder
             'type' => 'image_break',
             'title' => 'Your Car Deserves the Best',
             'subtitle' => 'Schedule your appointment today and experience the QAC difference.',
-            'image' => 'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_3.jpg',
+            'image' => 'https://qachouston.com/wp-content/uploads/2018/07/wordpress-auto-repair-slider_5.jpg',
             'content' => [
                 'overlay' => 'right',
                 'align' => 'right',

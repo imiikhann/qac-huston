@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - cd backend && composer install --no-dev --no-interaction --prefer-dist
+    - cd backend && php artisan migrate --force --no-interaction
+    - cd backend && php artisan config:cache && php artisan route:cache && php artisan view:cache
+    - cd frontend && npm ci
+    - cd frontend && npm run build

@@ -110,6 +110,17 @@
 
   .dark .input-field {
     @apply bg-white/10 border-white/20 text-white placeholder-qac-400 focus:ring-amber-500/30;
+    color-scheme: dark;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff;
+    caret-color: #fff;
+  }
+
+  .dark .input-field::-webkit-input-placeholder,
+  .dark .input-field::-moz-placeholder,
+  .dark .input-field::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
   }
 
   .label-field {
