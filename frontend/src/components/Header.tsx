@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Bars3Icon, XMarkIcon, SunIcon, MoonIcon } from '@heroicons/react/24/outline'
 import { useTheme } from '@/components/ThemeProvider'
-import type { NavigationMenuItem } from '@/lib/api'
+import { api, type NavigationMenuItem } from '@/lib/api'
 /* eslint-disable @next/next/no-img-element */
 
 export default function Header() {
@@ -13,9 +13,7 @@ export default function Header() {
   const [navItems, setNavItems] = useState<NavigationMenuItem[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/v1/navigation/header')
-      .then(r => r.json())
-      .then(d => setNavItems(d.data))
+    api.cms.navigation('header').then(d => setNavItems(d.data))
   }, [])
 
   return (

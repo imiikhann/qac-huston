@@ -61,7 +61,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationItems([
                 NavigationItem::make('Visit Website')
-                    ->url('http://localhost:3001', shouldOpenInNewTab: true)
+                    ->url(env('FRONTEND_URL', 'http://localhost:3001'), shouldOpenInNewTab: true)
                     ->icon('heroicon-o-globe-alt')
                     ->sort(999),
             ])

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import type { NavigationMenuItem, SiteSetting } from '@/lib/api'
+import { api, type NavigationMenuItem, type SiteSetting } from '@/lib/api'
 /* eslint-disable @next/next/no-img-element */
 
 const defaultLinks = [
@@ -23,10 +23,7 @@ export default function Footer() {
   const [settings, setSettings] = useState<SiteSetting | null>(null)
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/v1/settings')
-      .then(r => r.json())
-      .then(d => setSettings(d.data))
-      .catch(() => {})
+    api.cms.settings().then(d => setSettings(d.data)).catch(() => {})
   }, [])
   return (
     <footer className="bg-qac-900 dark:bg-black text-qac-200 relative overflow-hidden">
