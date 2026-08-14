@@ -4,8 +4,7 @@ const next = require('next')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
-const port = process.env.PORT || 3000
-const internalPort = 3000
+const port = Number(process.env.PORT) || 3000
 const primaryHost = 'qachouston.com'
 
 const requestHandler = (req, res) => {
@@ -19,21 +18,11 @@ const requestHandler = (req, res) => {
 }
 
 app.prepare().then(() => {
-  createServer(requestHandler).listen(port, () => {
-    console.log(`> Ready on http://localhost:${port}`)
+  const server = createServer(requestHandler)
+  server.listen(port, '127.0.0.1', () => {
+    console.log(`> Ready on http://127.0.0.1:${port}`)
   })
-
-  if (String(port) !== String(internalPort)) {
-    try {
-      const internal = createServer(requestHandler)
-      internal.listen(internalPort, '127.0.0.1', () => {
-        console.log(`> Internal listener on 127.0.0.1:${internalPort}`)
-      })
-      internal.on('error', (err) => {
-        console.error(`> Internal listener failed on 127.0.0.1:${internalPort}: ${err.message}`)
-      })
-    } catch (err) {
-      console.error(`> Could not start internal listener on 127.0.0.1:${internalPort}: ${err.message}`)
-    }
-  }
+  server.on('error', (err) => {
+    console.error(`> Listener error on 127.0.0.1:${port}: ${err.message}`)
+  })
 })
