@@ -24,8 +24,16 @@ app.prepare().then(() => {
   })
 
   if (String(port) !== String(internalPort)) {
-    createServer(requestHandler).listen(internalPort, '127.0.0.1', () => {
-      console.log(`> Internal listener on 127.0.0.1:${internalPort}`)
-    })
+    try {
+      const internal = createServer(requestHandler)
+      internal.listen(internalPort, '127.0.0.1', () => {
+        console.log(`> Internal listener on 127.0.0.1:${internalPort}`)
+      })
+      internal.on('error', (err) => {
+        console.error(`> Internal listener failed on 127.0.0.1:${internalPort}: ${err.message}`)
+      })
+    } catch (err) {
+      console.error(`> Could not start internal listener on 127.0.0.1:${internalPort}: ${err.message}`)
+    }
   }
 })
