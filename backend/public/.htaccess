@@ -9,6 +9,10 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    # Proxy the Next.js frontend (everything except Laravel/API/admin paths)
+    RewriteCond %{REQUEST_URI} !^/(api|admin|storage|build|vendor|js|css|fonts|wp-content)(/|$)
+    RewriteRule ^ http://127.0.0.1:3000%{REQUEST_URI} [P,QSA,L]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
