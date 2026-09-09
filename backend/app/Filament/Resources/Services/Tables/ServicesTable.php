@@ -17,7 +17,8 @@ class ServicesTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('category')
+                TextColumn::make('category_name')
+                    ->label('Category')
                     ->badge(),
                 TextColumn::make('price_range')
                     ->searchable(),

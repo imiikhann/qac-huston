@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 /* eslint-disable @next/next/no-img-element */
-import { api, Service, Review, Section, MembershipProgram } from '@/lib/api'
+import { api, Service, Review, Section, MembershipProgram, ServiceCategory } from '@/lib/api'
 import {
   WrenchIcon, BoltIcon, SparklesIcon, StarIcon, ChevronRightIcon,
   ArrowRightIcon, PhoneIcon, ClockIcon, MapPinIcon, ShieldCheckIcon,
@@ -67,12 +67,19 @@ const clienteleTabs = [
   { id: 'walkin', label: 'Walk-In', content: 'We welcome walk-in customers who may need a flat tire replacement, dead battery service, or towing assistance.', icon: HeartIcon },
 ]
 
+const defaultCategories: ServiceCategory[] = [
+  { id: 1, name: 'Electrical', slug: 'electrical', is_active: true, sort_order: 1 },
+  { id: 2, name: 'Mechanical', slug: 'mechanical', is_active: true, sort_order: 2 },
+  { id: 3, name: 'Special', slug: 'special', is_active: true, sort_order: 3 },
+]
+
 export default function HomePage() {
   const [services, setServices] = useState<Service[]>([])
   const [reviews, setReviews] = useState<Review[]>([])
   const [heroBanners, setHeroBanners] = useState<any[]>([])
   const [sections, setSections] = useState<Section[]>([])
   const [membershipPrograms, setMembershipPrograms] = useState<MembershipProgram[]>([])
+  const [categories, setCategories] = useState<ServiceCategory[]>(defaultCategories)
   const [activeCategory, setActiveCategory] = useState('electrical')
   const [activeClientele, setActiveClientele] = useState('individual')
   const [activeIndex, setActiveIndex] = useState(0)
@@ -82,6 +89,9 @@ export default function HomePage() {
 
   useEffect(() => {
     api.services.list().then((res) => setServices(res.data)).catch(() => {})
+    api.serviceCategories.list().then((res) => {
+      if (res.data.length > 0) setCategories(res.data)
+    }).catch(() => {})
     api.reviews.list().then((res) => setReviews(res.data.filter(r => r.is_approved).slice(0, 6))).catch(() => {})
     api.cms.heroBanners().then((res) => setHeroBanners(res.data)).catch(() => {})
     api.cms.sections().then((res) => setSections(res.data)).catch(() => {})
@@ -164,7 +174,6 @@ export default function HomePage() {
   }
 
   const allServices = services.filter((s) => s.category === activeCategory)
-  const categories = ['electrical', 'mechanical', 'special']
 
   const schema = {
     '@context': 'https://schema.org',
@@ -267,18 +276,18 @@ export default function HomePage() {
             <p className="section-subtitle">{servicesSection?.subtitle || 'We specialize in electrical, mechanical, and special services on all vehicles.'}</p>
           </div>
 
-          <div className="flex justify-center gap-2 mb-12">
+          <div className="flex justify-center gap-2 mb-12 flex-wrap">
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
+                key={cat.slug}
+                onClick={() => setActiveCategory(cat.slug)}
                 className={`px-6 py-3 rounded-xl font-medium text-sm capitalize transition-all duration-300 ${
-                  activeCategory === cat
+                  activeCategory === cat.slug
                     ? 'bg-qac-900 dark:bg-white text-white dark:text-qac-900 shadow-lg shadow-qac-900/20'
                     : 'glass-card text-qac-600 dark:text-qac-300 hover:bg-white/90 dark:hover:bg-qac-800/50'
                 }`}
               >
-                {cat === 'special' ? 'Special Services' : `${cat} Services`}
+                {cat.name} Services
               </button>
             ))}
           </div>

@@ -13,8 +13,16 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Proxy the Next.js frontend (everything except Laravel/API/admin paths)
+    # Maintenance mode: when public/.maintenance exists, serve the static page
+    # for the public site (admin/API/asset paths bypass this and stay online).
+    RewriteCond %{DOCUMENT_ROOT}/.maintenance -f
+    RewriteCond %{REQUEST_URI} !^/maintenance\.html$ [NC]
     RewriteCond %{REQUEST_URI} !^/(api|admin|storage|build|vendor|js|css|fonts|wp-content)(/|$)
+    RewriteCond %{REQUEST_URI} !^/livewire
+    RewriteRule ^ /maintenance.html [L]
+
+    # Proxy the Next.js frontend (everything except Laravel/API/admin paths)
+    RewriteCond %{REQUEST_URI} !^/(api|admin|storage|build|vendor|js|css|fonts|wp-content|maintenance\.html)(/|$)
     RewriteCond %{REQUEST_URI} !^/livewire
     RewriteRule ^ http://127.0.0.1:3000%{REQUEST_URI} [P,QSA,L]
 

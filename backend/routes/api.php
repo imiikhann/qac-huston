@@ -29,12 +29,14 @@ Route::prefix('v1')->group(function () {
 
     // CMS endpoints
     Route::get('settings', [CmsController::class, 'settings']);
+    Route::get('maintenance-status', [CmsController::class, 'maintenanceStatus']);
     Route::get('hero-banners', [CmsController::class, 'heroBanners']);
     Route::get('navigation/{location?}', [CmsController::class, 'navigation'])->defaults('location', 'header');
     Route::get('pages', [CmsController::class, 'pages']);
     Route::get('pages/{slug}', [CmsController::class, 'page']);
     Route::get('sections', [CmsController::class, 'sections']);
     Route::get('membership-programs', [CmsController::class, 'membershipPrograms']);
+    Route::get('service-categories', [CmsController::class, 'serviceCategories']);
     Route::post('track', [CmsController::class, 'track']);
 
     Route::post('appointments', [AppointmentController::class, 'store']);

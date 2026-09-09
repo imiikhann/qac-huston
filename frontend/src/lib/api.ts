@@ -23,8 +23,16 @@ export interface Service {
   id: number
   name: string
   description: string
-  category: 'electrical' | 'mechanical' | 'special'
+  category: string
   price_range: string
+  is_active: boolean
+  sort_order: number
+}
+
+export interface ServiceCategory {
+  id: number
+  name: string
+  slug: string
   is_active: boolean
   sort_order: number
 }
@@ -137,6 +145,9 @@ export const api = {
   services: {
     list: () => fetchAPI<{ data: Service[] }>('/services?per_page=100'),
     get: (id: number) => fetchAPI<{ data: Service }>(`/services/${id}`),
+  },
+  serviceCategories: {
+    list: () => fetchAPI<{ data: ServiceCategory[] }>('/service-categories'),
   },
   reviews: {
     list: () => fetchAPI<{ data: Review[] }>('/reviews'),

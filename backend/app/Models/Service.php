@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Service extends Model
 {
@@ -30,6 +31,13 @@ class Service extends Model
     public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    public function getCategoryNameAttribute(): string
+    {
+        $category = \App\Models\ServiceCategory::firstWhere('slug', $this->category);
+
+        return $category?->name ?? Str::headline($this->category ?? '');
     }
 
     public function scopeActive($query)

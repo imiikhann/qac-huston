@@ -16,6 +16,10 @@ class MembershipsTable
             ->columns([
                 TextColumn::make('customer.name')
                     ->searchable(),
+                TextColumn::make('customer.email')
+                    ->label('Customer Email')
+                    ->searchable()
+                    ->placeholder('-'),
                 TextColumn::make('program.name')
                     ->label('Program')
                     ->searchable()

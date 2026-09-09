@@ -8,6 +8,7 @@ use App\Models\MembershipProgram;
 use App\Models\NavigationMenu;
 use App\Models\Page;
 use App\Models\Section;
+use App\Models\ServiceCategory;
 use App\Models\SiteSetting;
 use App\Models\VisitorTracking;
 use App\Services\IpLocationService;
@@ -28,6 +29,13 @@ class CmsController extends Controller
     {
         return response()->json([
             'data' => HeroBanner::active()->get(),
+        ]);
+    }
+
+    public function maintenanceStatus()
+    {
+        return response()->json([
+            'enabled' => (bool) optional(SiteSetting::first())->is_maintenance_mode,
         ]);
     }
 
@@ -68,6 +76,13 @@ class CmsController extends Controller
     {
         return response()->json([
             'data' => MembershipProgram::active()->get(),
+        ]);
+    }
+
+    public function serviceCategories()
+    {
+        return response()->json([
+            'data' => ServiceCategory::active()->ordered()->get(),
         ]);
     }
 

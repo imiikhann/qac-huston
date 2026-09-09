@@ -1,21 +1,29 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { api, Service } from '@/lib/api'
+import { api, Service, ServiceCategory } from '@/lib/api'
 import { WrenchIcon, BoltIcon, SparklesIcon } from '@heroicons/react/24/outline'
 
 const categoryIcons: Record<string, any> = { electrical: BoltIcon, mechanical: WrenchIcon, special: SparklesIcon }
-const categoryLabels: Record<string, string> = { electrical: 'Electrical', mechanical: 'Mechanical', special: 'Special' }
+
+const defaultCategories: ServiceCategory[] = [
+  { id: 1, name: 'Electrical', slug: 'electrical', is_active: true, sort_order: 1 },
+  { id: 2, name: 'Mechanical', slug: 'mechanical', is_active: true, sort_order: 2 },
+  { id: 3, name: 'Special', slug: 'special', is_active: true, sort_order: 3 },
+]
 
 export default function ServicesPage() {
   const [services, setServices] = useState<Service[]>([])
+  const [categories, setCategories] = useState<ServiceCategory[]>(defaultCategories)
   const [activeCategory, setActiveCategory] = useState('electrical')
 
   useEffect(() => {
     api.services.list().then((res) => setServices(res.data)).catch(() => {})
+    api.serviceCategories.list().then((res) => {
+      if (res.data.length > 0) setCategories(res.data)
+    }).catch(() => {})
   }, [])
 
-  const categories = ['electrical', 'mechanical', 'special']
   const filteredServices = services.filter((s) => s.category === activeCategory)
 
   return (
@@ -31,18 +39,18 @@ export default function ServicesPage() {
 
       <section className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center gap-2 mb-10">
+          <div className="flex justify-center gap-2 mb-10 flex-wrap">
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
+                key={cat.slug}
+                onClick={() => setActiveCategory(cat.slug)}
                 className={`px-6 py-3 rounded-lg font-medium text-sm capitalize transition-all ${
-                  activeCategory === cat
+                  activeCategory === cat.slug
                     ? 'bg-qac-900 text-white shadow-lg'
                     : 'bg-qac-100 text-qac-600 hover:bg-qac-200'
                 }`}
               >
-                {categoryLabels[cat]}
+                {cat.name}
               </button>
             ))}
           </div>

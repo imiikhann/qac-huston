@@ -11,6 +11,7 @@ use App\Models\Membership;
 use App\Models\PpiRequest;
 use App\Models\Review;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\Testimonial;
 use App\Models\User;
 use App\Models\Vehicle;
@@ -26,6 +27,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@qachouston.com',
             'password' => bcrypt('password'),
         ]);
+
+        $this->call(ServiceCategorySeeder::class);
 
         // --- SERVICES (from live site) ---
         $services = [

@@ -19,9 +19,11 @@ class SiteSetting extends Model
         'address',
         'social_links',
         'footer_text',
+        'is_maintenance_mode',
     ];
 
     protected $casts = [
         'social_links' => 'array',
+        'is_maintenance_mode' => 'boolean',
     ];
 }

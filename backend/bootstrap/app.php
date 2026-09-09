@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->trustProxies(at: '*');
         $middleware->append(\App\Http\Middleware\TrackVisitor::class);
+        $middleware->prepend(\App\Http\Middleware\MaintenanceMode::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

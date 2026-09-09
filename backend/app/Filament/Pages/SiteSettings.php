@@ -8,10 +8,12 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\File;
 
 class SiteSettings extends Page
 {
@@ -44,6 +46,7 @@ class SiteSettings extends Page
             'address' => $this->record->address,
             'social_links' => $this->record->social_links,
             'footer_text' => $this->record->footer_text,
+            'is_maintenance_mode' => $this->record->is_maintenance_mode,
         ]);
     }
 
@@ -99,6 +102,13 @@ class SiteSettings extends Page
                             ->rows(3)
                             ->columnSpanFull(),
                     ]),
+                Section::make('Maintenance Mode')
+                    ->description('When enabled, visitors see a "Coming Soon" page instead of the website. The admin panel stays accessible.')
+                    ->schema([
+                        Toggle::make('is_maintenance_mode')
+                            ->label('Enable Maintenance Mode')
+                            ->helperText('Shows the maintenance page to the public. You can still log in here to disable it.'),
+                    ]),
             ]);
     }
 
@@ -108,9 +118,23 @@ class SiteSettings extends Page
 
         $this->record->update($data);
 
+        $this->syncMaintenanceFlag((bool) $data['is_maintenance_mode']);
+
         Notification::make()
             ->title('Site settings saved.')
             ->success()
             ->send();
+    }
+
+    private function syncMaintenanceFlag(bool $enabled): void
+    {
+        $flag = public_path('.maintenance');
+
+        if ($enabled) {
+            File::put($flag, '1');
+            return;
+        }
+
+        File::delete($flag);
     }
 }
