@@ -29,7 +29,7 @@ Route::prefix('v1')->group(function () {
 
     // CMS endpoints
     Route::get('settings', [CmsController::class, 'settings']);
-    Route::get('maintenance-status', [CmsController::class, 'maintenanceStatus']);
+    Route::get('maintenance-status', [CmsController::class, 'maintenanceStatus'])->middleware('web');
     Route::get('hero-banners', [CmsController::class, 'heroBanners']);
     Route::get('navigation/{location?}', [CmsController::class, 'navigation'])->defaults('location', 'header');
     Route::get('pages', [CmsController::class, 'pages']);

@@ -32,11 +32,15 @@ class CmsController extends Controller
         ]);
     }
 
-    public function maintenanceStatus()
+    public function maintenanceStatus(Request $request)
     {
-        return response()->json([
-            'enabled' => (bool) optional(SiteSetting::first())->is_maintenance_mode,
-        ]);
+        $enabled = (bool) optional(SiteSetting::first())->is_maintenance_mode;
+
+        if ($enabled && auth('web')->check()) {
+            $enabled = false;
+        }
+
+        return response()->json(['enabled' => $enabled]);
     }
 
     public function navigation($location = 'header')

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 /* eslint-disable @next/next/no-img-element */
-import { api, Service, Review, Section, MembershipProgram, ServiceCategory } from '@/lib/api'
+import { api, Service, Review, Section, MembershipProgram, ServiceCategory, FAQ } from '@/lib/api'
 import {
   WrenchIcon, BoltIcon, SparklesIcon, StarIcon, ChevronRightIcon,
   ArrowRightIcon, PhoneIcon, ClockIcon, MapPinIcon, ShieldCheckIcon,
@@ -13,7 +13,7 @@ import {
   FireIcon, ExclamationTriangleIcon, DocumentMagnifyingGlassIcon,
   BeakerIcon, TruckIcon as TruckSolid, ArrowsRightLeftIcon,
   ArrowPathIcon, SignalIcon, PaintBrushIcon, WrenchScrewdriverIcon,
-  SparklesIcon as SparklesSolid, CircleStackIcon
+  SparklesIcon as SparklesSolid, CircleStackIcon, ChevronDownIcon
 } from '@heroicons/react/24/outline'
 
 const serviceIcons: Record<string, any> = {
@@ -59,7 +59,7 @@ const serviceIcons: Record<string, any> = {
   'State Inspection including Emissions': DocumentMagnifyingGlassIcon,
 }
 
-const clienteleTabs = [
+const defaultClienteleTabs = [
   { id: 'individual', label: 'Individual', content: 'We perform all types of scheduled maintenance including oil changes, brake checks, A/C services and more. Emergency repairs, such as alternator replacement or troubleshooting engine overheating are also available. We also provide multi-point Pre-Purchase Inspection service.', icon: UsersIcon },
   { id: 'fleet', label: 'Fleet', content: 'We provide regular services to fleet companies involved in delivery services, logistics, and health services. Our high standards of quality and attention to detail help prevent breakdowns during deliveries.', icon: TruckIcon },
   { id: 'commercial', label: 'Commercial', content: 'We service a variety of commercial clients, including buses, box trucks, food trucks, forklifts, and work vans (including 15-seaters).', icon: ShieldCheckIcon },
@@ -79,6 +79,8 @@ export default function HomePage() {
   const [heroBanners, setHeroBanners] = useState<any[]>([])
   const [sections, setSections] = useState<Section[]>([])
   const [membershipPrograms, setMembershipPrograms] = useState<MembershipProgram[]>([])
+  const [faqs, setFaqs] = useState<FAQ[]>([])
+  const [openFaqId, setOpenFaqId] = useState<number | null>(null)
   const [categories, setCategories] = useState<ServiceCategory[]>(defaultCategories)
   const [activeCategory, setActiveCategory] = useState('electrical')
   const [activeClientele, setActiveClientele] = useState('individual')
@@ -96,6 +98,7 @@ export default function HomePage() {
     api.cms.heroBanners().then((res) => setHeroBanners(res.data)).catch(() => {})
     api.cms.sections().then((res) => setSections(res.data)).catch(() => {})
     api.cms.membershipPrograms().then((res) => setMembershipPrograms(res.data)).catch(() => {})
+    api.faqs.list().then((res) => setFaqs(res.data)).catch(() => {})
   }, [])
 
   const byType = (type: string) => sections.find(s => s.type === type)
@@ -126,6 +129,12 @@ export default function HomePage() {
 
   const servicesSection = byType('services')
   const clienteleSection = byType('clientele')
+  const clienteleTabs = (clienteleSection?.content?.tabs && Array.isArray(clienteleSection.content.tabs) && clienteleSection.content.tabs.length > 0)
+    ? clienteleSection.content.tabs
+    : defaultClienteleTabs
+  const activeClienteleTab = clienteleTabs.find((t) => t.id === activeClientele) ?? clienteleTabs[0]
+  const clienteleCardTitle = clienteleSection?.content?.card_title || 'Join Our Family'
+  const clienteleCardText = clienteleSection?.content?.card_text || 'Over 70% of our customers are loyal regulars'
   const membershipSection = byType('membership')
   const reviewsSection = byType('reviews')
   const ctaSection = byType('cta')
@@ -366,7 +375,7 @@ export default function HomePage() {
 
           <div className="flex flex-wrap justify-center gap-2 mb-10">
             {clienteleTabs.map((tab) => {
-              const TabIcon = tab.icon
+              const TabIcon = (tab as any).icon || UsersIcon
               return (
                 <button
                   key={tab.id}
@@ -388,15 +397,15 @@ export default function HomePage() {
             <div className="md:col-span-3 glass-card p-8 md:p-10">
               <span className="text-6xl text-amber-300/30 dark:text-amber-500/10 font-serif leading-none">&ldquo;</span>
               <p className="text-qac-700 dark:text-qac-300 leading-relaxed text-lg relative -mt-4">
-                {clienteleTabs.find((t) => t.id === activeClientele)?.content}
+                {activeClienteleTab?.content}
               </p>
             </div>
             <div className="md:col-span-2 glass-card p-6 flex flex-col items-center justify-center text-center">
               <div className="w-16 h-16 bg-amber-gradient rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                 <UsersIcon className="w-8 h-8 text-white" />
               </div>
-              <h3 className="font-semibold text-qac-900 dark:text-white mb-1">Join Our Family</h3>
-              <p className="text-sm text-qac-500 dark:text-qac-400">Over 70% of our customers are loyal regulars</p>
+              <h3 className="font-semibold text-qac-900 dark:text-white mb-1">{clienteleCardTitle}</h3>
+              <p className="text-sm text-qac-500 dark:text-qac-400">{clienteleCardText}</p>
             </div>
           </div>
         </div>
@@ -579,6 +588,48 @@ export default function HomePage() {
           <div className="flex flex-wrap justify-center gap-6 mt-10 text-sm text-qac-500">
             <span className="inline-flex items-center gap-2"><MapPinIcon className="w-4 h-4 text-amber-500" /> 9934 Jones Rd B5, Houston, TX</span>
             <span className="inline-flex items-center gap-2"><ClockIcon className="w-4 h-4 text-amber-500" /> Mon-Thu 9-6 | Fri-Sat 9-1</span>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faqs" ref={setSectionRef('faqs')} className="py-28 hero-gradient-bg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className={`text-center mb-16 transition-all duration-700 ${visibleSections.has('faqs') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h2 className="section-title">Frequently Asked Questions</h2>
+            <p className="section-subtitle">Everything you need to know about our services, hours, and policies.</p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            {faqs.length === 0 ? (
+              <p className="text-center text-qac-500 dark:text-qac-400">No FAQs yet.</p>
+            ) : (
+              <div className="space-y-3">
+                {faqs.map((faq) => (
+                  <div key={faq.id} className="glass-card-hover overflow-hidden" style={{ animationDelay: `${faqs.indexOf(faq) * 80}ms` }}>
+                    <button
+                      onClick={() => setOpenFaqId(openFaqId === faq.id ? null : faq.id)}
+                      className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-white/50 dark:hover:bg-white/5 transition-colors"
+                    >
+                      <span className="font-semibold text-qac-900 dark:text-white">{faq.question}</span>
+                      <ChevronDownIcon className={`w-5 h-5 text-amber-500 shrink-0 transition-transform duration-300 ${openFaqId === faq.id ? 'rotate-180' : ''}`} />
+                    </button>
+                    {openFaqId === faq.id && (
+                      <div className="px-5 pb-5 -mt-1">
+                        <p className="text-qac-600 dark:text-qac-400 leading-relaxed">{faq.answer}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="text-center mt-12">
+              <Link href="/faqs" className="inline-flex items-center gap-2 btn-outline group">
+                View All FAQs
+                <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

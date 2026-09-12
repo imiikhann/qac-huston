@@ -101,7 +101,38 @@ class CmsSeeder extends Seeder
             'type' => 'clientele',
             'title' => 'Clientele',
             'subtitle' => 'We serve a diverse range of customers with excellence.',
-            'content' => ['badge' => 'Who We Serve'],
+            'content' => [
+                'badge' => 'Who We Serve',
+                'tabs' => [
+                    [
+                        'id' => 'individual',
+                        'label' => 'Individual',
+                        'content' => 'We perform all types of scheduled maintenance including oil changes, brake checks, A/C services and more. Emergency repairs, such as alternator replacement or troubleshooting engine overheating are also available. We also provide multi-point Pre-Purchase Inspection service.',
+                    ],
+                    [
+                        'id' => 'fleet',
+                        'label' => 'Fleet',
+                        'content' => 'We provide regular services to fleet companies involved in delivery services, logistics, and health services. Our high standards of quality and attention to detail help prevent breakdowns during deliveries.',
+                    ],
+                    [
+                        'id' => 'commercial',
+                        'label' => 'Commercial',
+                        'content' => 'We service a variety of commercial clients, including buses, box trucks, food trucks, forklifts, and work vans (including 15-seaters).',
+                    ],
+                    [
+                        'id' => 'luxury',
+                        'label' => 'Luxury',
+                        'content' => 'We offer specialized repairs for premium brands, including Alfa Romeo, BMW, Ferrari, Maserati, Mercedes, Porsche, Range Rover, and Volvo.',
+                    ],
+                    [
+                        'id' => 'walkin',
+                        'label' => 'Walk-In',
+                        'content' => 'We welcome walk-in customers who may need a flat tire replacement, dead battery service, or towing assistance.',
+                    ],
+                ],
+                'card_title' => 'Join Our Family',
+                'card_text' => 'Over 70% of our customers are loyal regulars',
+            ],
             'is_active' => true,
             'sort_order' => 4,
         ]);

@@ -37,6 +37,14 @@
     @apply bg-qac-900/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-glass-dark;
   }
 
+  .card {
+    @apply bg-white border border-qac-100 rounded-2xl shadow-glass;
+  }
+
+  .dark .card {
+    @apply bg-qac-900/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-glass-dark;
+  }
+
   .glass-card-hover {
     @apply glass-card hover:shadow-glass-hover hover:bg-white/80 transition-all duration-300;
   }

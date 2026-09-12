@@ -60,11 +60,11 @@ export default function BookPage() {
     return (
       <section className="py-20">
         <div className="max-w-lg mx-auto px-4 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckIcon className="w-8 h-8 text-green-600" />
+          <div className="w-16 h-16 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckIcon className="w-8 h-8 text-green-600 dark:text-green-400" />
           </div>
-          <h2 className="text-2xl font-bold text-qac-900 mb-2">Booking Confirmed!</h2>
-          <p className="text-qac-500 mb-6">We&apos;ll send you a confirmation shortly. You can also call us at (832) 896-3865.</p>
+          <h2 className="text-2xl font-bold text-qac-900 dark:text-white mb-2">Booking Confirmed!</h2>
+          <p className="text-qac-500 dark:text-qac-400 mb-6">We&apos;ll send you a confirmation shortly. You can also call us at (832) 896-3865.</p>
           <a href="/" className="btn-primary">Back to Home</a>
         </div>
       </section>
@@ -73,10 +73,10 @@ export default function BookPage() {
 
   return (
     <>
-      <section className="bg-qac-50 py-16 lg:py-20">
+      <section className="bg-qac-50 dark:bg-qac-900/30 py-16 lg:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 mb-4">Book an Appointment</h1>
-          <p className="text-xl text-qac-500">Schedule your service in a few simple steps.</p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 dark:text-white mb-4">Book an Appointment</h1>
+          <p className="text-xl text-qac-500 dark:text-qac-400">Schedule your service in a few simple steps.</p>
         </div>
       </section>
 
@@ -87,12 +87,12 @@ export default function BookPage() {
             {steps.map((s, i) => (
               <div key={s} className="flex items-center">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
-                  i <= step ? 'bg-amber-500 text-white' : 'bg-qac-100 text-qac-400'
+                  i <= step ? 'bg-amber-500 text-white' : 'bg-qac-100 dark:bg-qac-800 text-qac-400 dark:text-qac-400'
                 }`}>
                   {i < step ? <CheckIcon className="w-4 h-4" /> : i + 1}
                 </div>
-                <span className={`ml-2 text-sm hidden sm:block ${i <= step ? 'text-qac-900 font-medium' : 'text-qac-400'}`}>{s}</span>
-                {i < steps.length - 1 && <div className={`h-0.5 w-8 sm:w-16 mx-2 ${i < step ? 'bg-amber-500' : 'bg-qac-200'}`} />}
+                <span className={`ml-2 text-sm hidden sm:block ${i <= step ? 'text-qac-900 dark:text-white font-medium' : 'text-qac-400 dark:text-qac-400'}`}>{s}</span>
+                {i < steps.length - 1 && <div className={`h-0.5 w-8 sm:w-16 mx-2 ${i < step ? 'bg-amber-500' : 'bg-qac-200 dark:bg-qac-700'}`} />}
               </div>
             ))}
           </div>
@@ -100,14 +100,14 @@ export default function BookPage() {
           {/* Step content */}
           <div className="card p-8">
             {step > 0 && (
-              <button onClick={() => setStep(step - 1)} className="flex items-center gap-1 text-sm text-qac-500 hover:text-qac-900 mb-6">
+              <button onClick={() => setStep(step - 1)} className="flex items-center gap-1 text-sm text-qac-500 dark:text-qac-400 hover:text-qac-900 dark:hover:text-white mb-6">
                 <ChevronLeftIcon className="w-4 h-4" /> Back
               </button>
             )}
 
             {step === 0 && (
               <div>
-                <h2 className="text-xl font-bold text-qac-900 mb-4">Select a Service</h2>
+                <h2 className="text-xl font-bold text-qac-900 dark:text-white mb-4">Select a Service</h2>
                 <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
                   {services.filter(s => s.is_active).map((service) => (
                     <button
@@ -115,14 +115,14 @@ export default function BookPage() {
                       onClick={() => setForm({ ...form, service_id: String(service.id) })}
                       className={`w-full text-left p-4 rounded-xl border-2 transition-all ${
                         Number(form.service_id) === service.id
-                          ? 'border-amber-500 bg-amber-50'
-                          : 'border-qac-200 hover:border-qac-300'
+                          ? 'border-amber-500 bg-amber-50 dark:bg-amber-900/30'
+                          : 'border-qac-200 dark:border-qac-700 hover:border-qac-300 dark:hover:border-qac-500'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="font-semibold text-qac-900">{service.name}</p>
-                          <p className="text-sm text-qac-500 mt-1">{service.description}</p>
+                          <p className="font-semibold text-qac-900 dark:text-white">{service.name}</p>
+                          <p className="text-sm text-qac-500 dark:text-qac-400 mt-1">{service.description}</p>
                         </div>
                         <div className="text-right ml-4">
                           {service.price_range && (
@@ -138,7 +138,7 @@ export default function BookPage() {
 
             {step === 1 && (
               <div>
-                <h2 className="text-xl font-bold text-qac-900 mb-4">Vehicle Details</h2>
+                <h2 className="text-xl font-bold text-qac-900 dark:text-white mb-4">Vehicle Details</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="sm:col-span-2">
                     <label className="label-field">Make *</label>
@@ -166,7 +166,7 @@ export default function BookPage() {
 
             {step === 2 && (
               <div>
-                <h2 className="text-xl font-bold text-qac-900 mb-4">Preferred Date & Time</h2>
+                <h2 className="text-xl font-bold text-qac-900 dark:text-white mb-4">Preferred Date & Time</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="label-field">Date *</label>
@@ -190,7 +190,7 @@ export default function BookPage() {
 
             {step === 3 && (
               <div>
-                <h2 className="text-xl font-bold text-qac-900 mb-4">Contact Information</h2>
+                <h2 className="text-xl font-bold text-qac-900 dark:text-white mb-4">Contact Information</h2>
                 <div className="space-y-4">
                   <div>
                     <label className="label-field">Full Name *</label>
@@ -213,29 +213,29 @@ export default function BookPage() {
 
             {step === 4 && (
               <div>
-                <h2 className="text-xl font-bold text-qac-900 mb-6">Confirm Your Booking</h2>
+                <h2 className="text-xl font-bold text-qac-900 dark:text-white mb-6">Confirm Your Booking</h2>
                 <div className="space-y-4">
-                  <div className="bg-qac-50 rounded-xl p-4">
-                    <p className="text-sm text-qac-500">Service</p>
-                    <p className="font-semibold text-qac-900">{services.find(s => s.id === Number(form.service_id))?.name}</p>
+                  <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
+                    <p className="text-sm text-qac-500 dark:text-qac-400">Service</p>
+                    <p className="font-semibold text-qac-900 dark:text-white">{services.find(s => s.id === Number(form.service_id))?.name}</p>
                   </div>
-                  <div className="bg-qac-50 rounded-xl p-4">
-                    <p className="text-sm text-qac-500">Vehicle</p>
-                    <p className="font-semibold text-qac-900">{form.vehicle.make} {form.vehicle.model} {form.vehicle.year}</p>
+                  <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
+                    <p className="text-sm text-qac-500 dark:text-qac-400">Vehicle</p>
+                    <p className="font-semibold text-qac-900 dark:text-white">{form.vehicle.make} {form.vehicle.model} {form.vehicle.year}</p>
                   </div>
-                  <div className="bg-qac-50 rounded-xl p-4">
-                    <p className="text-sm text-qac-500">Date & Time</p>
-                    <p className="font-semibold text-qac-900">{form.requested_date} at {form.requested_time}</p>
+                  <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
+                    <p className="text-sm text-qac-500 dark:text-qac-400">Date & Time</p>
+                    <p className="font-semibold text-qac-900 dark:text-white">{form.requested_date} at {form.requested_time}</p>
                   </div>
-                  <div className="bg-qac-50 rounded-xl p-4">
-                    <p className="text-sm text-qac-500">Contact</p>
-                    <p className="font-semibold text-qac-900">{form.customer.name}</p>
-                    <p className="text-sm text-qac-500">{form.customer.email} | {form.customer.phone}</p>
+                  <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
+                    <p className="text-sm text-qac-500 dark:text-qac-400">Contact</p>
+                    <p className="font-semibold text-qac-900 dark:text-white">{form.customer.name}</p>
+                    <p className="text-sm text-qac-500 dark:text-qac-400">{form.customer.email} | {form.customer.phone}</p>
                   </div>
                   {form.notes && (
-                    <div className="bg-qac-50 rounded-xl p-4">
-                      <p className="text-sm text-qac-500">Notes</p>
-                      <p className="text-qac-700">{form.notes}</p>
+                    <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
+                      <p className="text-sm text-qac-500 dark:text-qac-400">Notes</p>
+                      <p className="text-qac-700 dark:text-qac-300">{form.notes}</p>
                     </div>
                   )}
                 </div>

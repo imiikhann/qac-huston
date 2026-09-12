@@ -55,10 +55,15 @@ const MAINTENANCE_HTML = `<!DOCTYPE html>
 </body>
 </html>`;
 
-async function maintenanceEnabled(): Promise<boolean> {
+async function maintenanceEnabled(req: NextRequest): Promise<boolean> {
   try {
+    const cookies = req.cookies
+      .getAll()
+      .map((c) => `${c.name}=${c.value}`)
+      .join('; ');
     const res = await fetch(`${API_URL}/maintenance-status`, {
       cache: 'no-store',
+      headers: cookies ? { cookie: cookies } : {},
     });
     if (!res.ok) return false;
     const data = (await res.json()) as { enabled?: boolean };
@@ -69,7 +74,7 @@ async function maintenanceEnabled(): Promise<boolean> {
 }
 
 export async function middleware(req: NextRequest) {
-  if (await maintenanceEnabled()) {
+  if (await maintenanceEnabled(req)) {
     return new NextResponse(MAINTENANCE_HTML, {
       status: 503,
       headers: { 'content-type': 'text/html; charset=utf-8' },

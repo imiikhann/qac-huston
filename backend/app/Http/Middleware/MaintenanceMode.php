@@ -47,6 +47,10 @@ class MaintenanceMode
     {
         $path = trim($request->getPathInfo(), '/');
 
+        if (str_starts_with($path, 'livewire-')) {
+            return true;
+        }
+
         foreach ($this->exemptPrefixes as $prefix) {
             if ($path === $prefix || str_starts_with($path, $prefix . '/')) {
                 return true;
