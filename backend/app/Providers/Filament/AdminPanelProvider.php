@@ -47,6 +47,21 @@ class AdminPanelProvider extends PanelProvider
             fn (): string => '<link rel="stylesheet" href="' . Vite::asset('resources/css/app.css') . '">',
         );
 
+        // Broadcast configuration is injected at runtime so the same compiled
+        // JS works on local (Reverb) and production (managed Pusher) without
+        // needing a Node build on shared hosting.
+        FilamentView::registerRenderHook(
+            'panels::head.start',
+            fn (): string => '<script>window.QAC_ECHO_CONFIG=' . json_encode([
+                'driver' => config('broadcasting.default'),
+                'key' => config('broadcasting.connections.' . config('broadcasting.default') . '.key'),
+                'cluster' => config('broadcasting.connections.pusher.options.cluster'),
+                'host' => config('broadcasting.connections.reverb.host'),
+                'port' => (int) config('broadcasting.connections.reverb.port', 8080),
+                'scheme' => config('broadcasting.connections.reverb.scheme', 'http'),
+            ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) . ';</script>',
+        );
+
         // Real-time admin notifications: listen to the private
         // `admin.tickets` channel over Reverb (WebSocket) and pop a toast
         // the moment a customer starts a ticket or sends a message.
