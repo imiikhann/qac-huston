@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Sections\Tables;
 
+use App\Support\TableExport;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -27,15 +28,20 @@ class SectionsTable
                         'reviews' => 'gray',
                         'cta' => 'warning',
                         default => 'gray',
-                    }),
+                    })
+                    ->toggleable(),
                 TextColumn::make('title')
-                    ->searchable(),
-                ImageColumn::make('image'),
+                    ->searchable()
+                    ->toggleable(),
+                ImageColumn::make('image')
+                    ->toggleable(),
                 IconColumn::make('is_active')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(),
                 TextColumn::make('sort_order')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -55,6 +61,8 @@ class SectionsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+                TableExport::excelAction(),
+                TableExport::pdfAction(),
             ]);
     }
 }

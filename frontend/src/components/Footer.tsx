@@ -60,23 +60,23 @@ export default function Footer() {
             <h3 className="font-semibold text-white mb-4">Contact</h3>
             <div className="space-y-3 text-sm glass-card-dark p-5">
               <div>
-                <p className="text-qac-500 text-xs uppercase tracking-wider">Address</p>
+                <p className="text-qac-500 dark:text-qac-300 text-xs uppercase tracking-wider">Address</p>
                 <p className="text-white">{settings?.address || '9934 Jones Rd B5, Houston, TX 77065'}</p>
               </div>
               <div>
-                <p className="text-qac-500 text-xs uppercase tracking-wider">Phone</p>
+                <p className="text-qac-500 dark:text-qac-300 text-xs uppercase tracking-wider">Phone</p>
                 <a href={`tel:${settings?.contact_phone?.replace(/\D/g, '') || '+18328963865'}`} className="text-white hover:text-amber-400 transition-colors">
                   {settings?.contact_phone || '(832) 896-3865'}
                 </a>
               </div>
               <div>
-                <p className="text-qac-500 text-xs uppercase tracking-wider">Email</p>
+                <p className="text-qac-500 dark:text-qac-300 text-xs uppercase tracking-wider">Email</p>
                 <a href={`mailto:${settings?.contact_email || 'contact@qachouston.com'}`} className="text-white hover:text-amber-400 transition-colors">
                   {settings?.contact_email || 'contact@qachouston.com'}
                 </a>
               </div>
               <div>
-                <p className="text-qac-500 text-xs uppercase tracking-wider">Hours</p>
+                <p className="text-qac-500 dark:text-qac-300 text-xs uppercase tracking-wider">Hours</p>
                 <p className="text-white">Mon-Thu: 9am-6pm</p>
                 <p className="text-white">Fri-Sat: 9am-1pm</p>
                 <p className="text-white">Sun: Closed</p>
@@ -85,7 +85,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-qac-800 mt-10 pt-8 text-center text-sm text-qac-500">
+        <div className="border-t border-qac-800 mt-10 pt-8 text-center text-sm text-qac-500 dark:text-qac-300">
           <p>&copy; {new Date().getFullYear()} Quality Automotive Center (QAC) Houston. All rights reserved.</p>
         </div>
       </div>

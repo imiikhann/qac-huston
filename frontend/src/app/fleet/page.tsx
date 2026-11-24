@@ -17,10 +17,10 @@ const fleets = [
 export default function FleetPage() {
   return (
     <>
-      <section className="bg-qac-50 py-16 lg:py-20">
+      <section className="bg-qac-50 dark:bg-qac-900/30 py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 mb-4">Fleet Services</h1>
-          <p className="text-xl text-qac-500 max-w-2xl mx-auto">
+          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 dark:text-white mb-4">Fleet Services</h1>
+          <p className="text-xl text-qac-500 dark:text-qac-300 max-w-2xl mx-auto">
             We proudly serve a variety of fleet clients with priority service and custom maintenance programs.
           </p>
         </div>
@@ -30,12 +30,12 @@ export default function FleetPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {fleets.map((fleet) => (
-              <div key={fleet.name} className="card text-center">
-                <div className="w-16 h-16 bg-qac-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-qac-500">{fleet.name.charAt(0)}</span>
+              <div key={fleet.name} className="card text-center p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                <div className="w-16 h-16 bg-amber-gradient rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
+                  <span className="text-2xl font-bold text-white">{fleet.name.charAt(0)}</span>
                 </div>
-                <h3 className="font-semibold text-qac-900 text-lg mb-2">{fleet.name}</h3>
-                <p className="text-sm text-qac-500">{fleet.desc}</p>
+                <h3 className="font-semibold text-qac-900 dark:text-white text-lg mb-2">{fleet.name}</h3>
+                <p className="text-sm text-qac-500 dark:text-qac-300">{fleet.desc}</p>
               </div>
             ))}
           </div>
@@ -47,7 +47,7 @@ export default function FleetPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/book" className="btn-primary">Book Fleet Service</Link>
-              <Link href="/contact" className="btn-secondary bg-white text-qac-900 hover:bg-qac-100">
+              <Link href="/contact" className="btn-secondary bg-white dark:bg-qac-900/60 text-qac-900 dark:text-white hover:bg-qac-100 dark:bg-qac-800/60">
                 Contact Us
               </Link>
             </div>

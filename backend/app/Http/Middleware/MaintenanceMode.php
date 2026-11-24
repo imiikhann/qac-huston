@@ -25,11 +25,13 @@ class MaintenanceMode
 
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $this->isEnabled()) {
+        // Exempt paths (api, admin, livewire, ...) never see maintenance mode and
+        // must not pay for the SiteSetting DB lookup on every request.
+        if ($this->isExempt($request)) {
             return $next($request);
         }
 
-        if ($this->isExempt($request)) {
+        if (! $this->isEnabled()) {
             return $next($request);
         }
 

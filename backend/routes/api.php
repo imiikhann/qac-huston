@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\V1\PPIRequestController;
 use App\Http\Controllers\Api\V1\ReviewController;
 use App\Http\Controllers\Api\V1\ServiceController;
 use App\Http\Controllers\Api\V1\TestimonialController;
+use App\Http\Controllers\Api\V1\TicketController;
 use App\Http\Controllers\Api\V1\VehicleController;
 use App\Http\Controllers\Api\V1\VendorController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,11 @@ Route::prefix('v1')->group(function () {
     Route::post('ppi-requests', [PPIRequestController::class, 'store']);
     Route::post('leads', [LeadController::class, 'store']);
     Route::post('contact', [ContactController::class, 'store']);
+
+    // Support ticket endpoints (website chat widget)
+    Route::post('tickets', [TicketController::class, 'store'])->middleware('throttle:30,1');
+    Route::get('tickets/{uuid}', [TicketController::class, 'show'])->middleware('throttle:120,1');
+    Route::post('tickets/{uuid}/messages', [TicketController::class, 'reply'])->middleware('throttle:60,1');
 
     // Auth routes
     Route::post('auth/login', [AuthController::class, 'login']);

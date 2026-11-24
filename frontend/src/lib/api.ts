@@ -3,12 +3,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1
 async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const isFormData = options?.body instanceof FormData
   const res = await fetch(`${API_URL}${endpoint}`, {
+    ...options,
     headers: {
       ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
       'Accept': 'application/json',
-      ...options?.headers,
+      ...(options?.headers || {}),
     },
-    ...options,
   })
 
   if (!res.ok) {
@@ -141,6 +141,28 @@ export interface MembershipProgram {
   sort_order: number
 }
 
+export interface Ticket {
+  uuid: string
+  key?: string
+  status: 'open' | 'pending' | 'resolved' | 'closed'
+  name: string
+  email: string
+  subject?: string
+  created_at: string
+  last_message_at?: string
+  messages?: TicketMessage[]
+}
+
+export interface TicketMessage {
+  id: number
+  ticket_id?: number
+  sender: 'customer' | 'admin'
+  message: string
+  status?: Ticket['status']
+  created_at: string
+  updated_at?: string
+}
+
 export const api = {
   services: {
     list: () => fetchAPI<{ data: Service[] }>('/services?per_page=100'),
@@ -220,5 +242,23 @@ export const api = {
     page: (slug: string) => fetchAPI<{ data: Page }>(`/pages/${slug}`),
     sections: () => fetchAPI<{ data: Section[] }>('/sections'),
     membershipPrograms: () => fetchAPI<{ data: MembershipProgram[] }>('/membership-programs'),
+  },
+
+  tickets: {
+    create: (data: { name: string; email: string; phone?: string; message: string }) =>
+      fetchAPI<{ data: Ticket; message: string }>('/tickets', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      }),
+    get: (uuid: string, key: string) =>
+      fetchAPI<{ data: Ticket }>(`/tickets/${uuid}`, {
+        headers: { 'X-Ticket-Key': key },
+      }),
+    reply: (uuid: string, key: string, message: string) =>
+      fetchAPI<{ data: TicketMessage; message: string }>(`/tickets/${uuid}/messages`, {
+        method: 'POST',
+        headers: { 'X-Ticket-Key': key },
+        body: JSON.stringify({ message }),
+      }),
   },
 }

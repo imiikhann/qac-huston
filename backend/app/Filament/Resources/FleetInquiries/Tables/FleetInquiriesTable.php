@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\FleetInquiries\Tables;
 
+use App\Support\TableExport;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,17 +16,22 @@ class FleetInquiriesTable
         return $table
             ->columns([
                 TextColumn::make('company_name')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('contact_name')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('email')
                     ->label('Email address')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('phone')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('fleet_size')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -45,6 +51,8 @@ class FleetInquiriesTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+                TableExport::excelAction(),
+                TableExport::pdfAction(),
             ]);
     }
 }

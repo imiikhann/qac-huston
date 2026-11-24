@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PpiRequests\Tables;
 
+use App\Support\TableExport;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,27 +16,36 @@ class PpiRequestsTable
         return $table
             ->columns([
                 TextColumn::make('customer_name')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('email')
                     ->label('Email address')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('phone')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('vehicle_make')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('vehicle_model')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('vehicle_year')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('preferred_date')
                     ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('preferred_time')
                     ->time()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('tier')
-                    ->badge(),
+                    ->badge()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -55,6 +65,8 @@ class PpiRequestsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+                TableExport::excelAction(),
+                TableExport::pdfAction(),
             ]);
     }
 }

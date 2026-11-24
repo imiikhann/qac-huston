@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\MembershipPrograms\Tables;
 
+use App\Support\TableExport;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -16,17 +17,22 @@ class MembershipProgramsTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('price'),
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('price')
+                    ->toggleable(),
                 TextColumn::make('is_popular')
                     ->badge()
                     ->color(fn (bool $state): string => $state ? 'success' : 'gray')
-                    ->formatStateUsing(fn (bool $state): string => $state ? 'Popular' : ''),
+                    ->formatStateUsing(fn (bool $state): string => $state ? 'Popular' : '')
+                    ->toggleable(),
                 IconColumn::make('is_active')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(),
                 TextColumn::make('sort_order')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -46,6 +52,8 @@ class MembershipProgramsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+                TableExport::excelAction(),
+                TableExport::pdfAction(),
             ]);
     }
 }

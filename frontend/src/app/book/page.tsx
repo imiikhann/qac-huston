@@ -59,12 +59,12 @@ export default function BookPage() {
   if (submitted) {
     return (
       <section className="py-20">
-        <div className="max-w-lg mx-auto px-4 text-center">
+        <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="w-16 h-16 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckIcon className="w-8 h-8 text-green-600 dark:text-green-400" />
           </div>
           <h2 className="text-2xl font-bold text-qac-900 dark:text-white mb-2">Booking Confirmed!</h2>
-          <p className="text-qac-500 dark:text-qac-400 mb-6">We&apos;ll send you a confirmation shortly. You can also call us at (832) 896-3865.</p>
+          <p className="text-qac-500 dark:text-qac-300 mb-6">We&apos;ll send you a confirmation shortly. You can also call us at (832) 896-3865.</p>
           <a href="/" className="btn-primary">Back to Home</a>
         </div>
       </section>
@@ -76,7 +76,7 @@ export default function BookPage() {
       <section className="bg-qac-50 dark:bg-qac-900/30 py-16 lg:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 dark:text-white mb-4">Book an Appointment</h1>
-          <p className="text-xl text-qac-500 dark:text-qac-400">Schedule your service in a few simple steps.</p>
+          <p className="text-xl text-qac-500 dark:text-qac-300">Schedule your service in a few simple steps.</p>
         </div>
       </section>
 
@@ -100,7 +100,7 @@ export default function BookPage() {
           {/* Step content */}
           <div className="card p-8">
             {step > 0 && (
-              <button onClick={() => setStep(step - 1)} className="flex items-center gap-1 text-sm text-qac-500 dark:text-qac-400 hover:text-qac-900 dark:hover:text-white mb-6">
+              <button onClick={() => setStep(step - 1)} className="flex items-center gap-1 text-sm text-qac-500 dark:text-qac-300 hover:text-qac-900 dark:hover:text-white mb-6">
                 <ChevronLeftIcon className="w-4 h-4" /> Back
               </button>
             )}
@@ -122,7 +122,7 @@ export default function BookPage() {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-semibold text-qac-900 dark:text-white">{service.name}</p>
-                          <p className="text-sm text-qac-500 dark:text-qac-400 mt-1">{service.description}</p>
+                          <p className="text-sm text-qac-500 dark:text-qac-300 mt-1">{service.description}</p>
                         </div>
                         <div className="text-right ml-4">
                           {service.price_range && (
@@ -216,25 +216,25 @@ export default function BookPage() {
                 <h2 className="text-xl font-bold text-qac-900 dark:text-white mb-6">Confirm Your Booking</h2>
                 <div className="space-y-4">
                   <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
-                    <p className="text-sm text-qac-500 dark:text-qac-400">Service</p>
+                    <p className="text-sm text-qac-500 dark:text-qac-300">Service</p>
                     <p className="font-semibold text-qac-900 dark:text-white">{services.find(s => s.id === Number(form.service_id))?.name}</p>
                   </div>
                   <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
-                    <p className="text-sm text-qac-500 dark:text-qac-400">Vehicle</p>
+                    <p className="text-sm text-qac-500 dark:text-qac-300">Vehicle</p>
                     <p className="font-semibold text-qac-900 dark:text-white">{form.vehicle.make} {form.vehicle.model} {form.vehicle.year}</p>
                   </div>
                   <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
-                    <p className="text-sm text-qac-500 dark:text-qac-400">Date & Time</p>
+                    <p className="text-sm text-qac-500 dark:text-qac-300">Date & Time</p>
                     <p className="font-semibold text-qac-900 dark:text-white">{form.requested_date} at {form.requested_time}</p>
                   </div>
                   <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
-                    <p className="text-sm text-qac-500 dark:text-qac-400">Contact</p>
+                    <p className="text-sm text-qac-500 dark:text-qac-300">Contact</p>
                     <p className="font-semibold text-qac-900 dark:text-white">{form.customer.name}</p>
-                    <p className="text-sm text-qac-500 dark:text-qac-400">{form.customer.email} | {form.customer.phone}</p>
+                    <p className="text-sm text-qac-500 dark:text-qac-300">{form.customer.email} | {form.customer.phone}</p>
                   </div>
                   {form.notes && (
                     <div className="bg-qac-50 dark:bg-qac-900/40 rounded-xl p-4">
-                      <p className="text-sm text-qac-500 dark:text-qac-400">Notes</p>
+                      <p className="text-sm text-qac-500 dark:text-qac-300">Notes</p>
                       <p className="text-qac-700 dark:text-qac-300">{form.notes}</p>
                     </div>
                   )}

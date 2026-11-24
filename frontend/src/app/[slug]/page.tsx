@@ -31,9 +31,9 @@ export default async function CMSPage({ params }: Props) {
   return (
     <section className="py-16 lg:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 mb-8">{page.title}</h1>
+        <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 dark:text-white mb-8">{page.title}</h1>
         <div
-          className="prose prose-lg max-w-none prose-headings:text-qac-900 prose-a:text-amber-600"
+          className="prose prose-lg max-w-none prose-headings:text-qac-900 dark:text-white prose-a:text-amber-600"
           dangerouslySetInnerHTML={{ __html: page.content || '' }}
         />
       </div>

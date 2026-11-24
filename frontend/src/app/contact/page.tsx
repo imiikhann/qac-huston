@@ -31,12 +31,12 @@ export default function ContactPage() {
   if (submitted) {
     return (
       <section className="py-20">
-        <div className="max-w-lg mx-auto px-4 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+        <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="w-16 h-16 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
           </div>
-          <h2 className="text-2xl font-bold text-qac-900 mb-2">Message Sent!</h2>
-          <p className="text-qac-500">We&apos;ll get back to you shortly.</p>
+          <h2 className="text-2xl font-bold text-qac-900 dark:text-white mb-2">Message Sent!</h2>
+          <p className="text-qac-500 dark:text-qac-300">We&apos;ll get back to you shortly.</p>
         </div>
       </section>
     )
@@ -44,17 +44,17 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="bg-qac-50 py-16 lg:py-20">
+      <section className="bg-qac-50 dark:bg-qac-900/30 py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 mb-4">Get in Touch</h1>
-          <p className="text-xl text-qac-500">We&apos;d love to hear from you.</p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 dark:text-white mb-4">Get in Touch</h1>
+          <p className="text-xl text-qac-500 dark:text-qac-300">We&apos;d love to hear from you.</p>
         </div>
       </section>
 
       <section className="py-16 lg:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-2xl font-bold text-qac-900 mb-6">Send Us a Message</h2>
+            <h2 className="text-2xl font-bold text-qac-900 dark:text-white mb-6">Send Us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="label-field">Full Name *</label>
@@ -94,25 +94,25 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold text-qac-900 mb-6">Contact Information</h2>
+            <h2 className="text-2xl font-bold text-qac-900 dark:text-white mb-6">Contact Information</h2>
             <div className="space-y-6">
-              <div className="card">
-                <h3 className="font-semibold text-qac-900 mb-1">Address</h3>
-                <p className="text-qac-600">9934 Jones Rd B5<br />Houston, TX 77065</p>
+              <div className="card p-6">
+                <h3 className="font-semibold text-qac-900 dark:text-white mb-1">Address</h3>
+                <p className="text-qac-600 dark:text-qac-400">9934 Jones Rd B5<br />Houston, TX 77065</p>
               </div>
-              <div className="card">
-                <h3 className="font-semibold text-qac-900 mb-1">Phone</h3>
-                <a href="tel:+18328963865" className="text-amber-600 hover:text-amber-700 font-medium">(832) 896-3865</a>
+              <div className="card p-6">
+                <h3 className="font-semibold text-qac-900 dark:text-white mb-1">Phone</h3>
+                <a href="tel:+18328963865" className="text-amber-600 dark:text-amber-400 hover:text-amber-700 font-medium">(832) 896-3865</a>
               </div>
-              <div className="card">
-                <h3 className="font-semibold text-qac-900 mb-1">Email</h3>
-                <a href="mailto:contact@qachouston.com" className="text-amber-600 hover:text-amber-700 font-medium">contact@qachouston.com</a>
+              <div className="card p-6">
+                <h3 className="font-semibold text-qac-900 dark:text-white mb-1">Email</h3>
+                <a href="mailto:contact@qachouston.com" className="text-amber-600 dark:text-amber-400 hover:text-amber-700 font-medium">contact@qachouston.com</a>
               </div>
-              <div className="card">
-                <h3 className="font-semibold text-qac-900 mb-1">Hours</h3>
-                <p className="text-qac-600">Mon-Thu: 9am - 6pm</p>
-                <p className="text-qac-600">Fri-Sat: 9am - 1pm</p>
-                <p className="text-qac-600">Sun: Closed</p>
+              <div className="card p-6">
+                <h3 className="font-semibold text-qac-900 dark:text-white mb-1">Hours</h3>
+                <p className="text-qac-600 dark:text-qac-400">Mon-Thu: 9am - 6pm</p>
+                <p className="text-qac-600 dark:text-qac-400">Fri-Sat: 9am - 1pm</p>
+                <p className="text-qac-600 dark:text-qac-400">Sun: Closed</p>
               </div>
             </div>
           </div>

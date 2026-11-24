@@ -5,13 +5,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
+  html {
+    overflow-x: hidden;
+  }
   body {
-    @apply bg-white text-qac-900 font-sans antialiased transition-colors duration-300;
+    background-color: #ffffff;
+    color: #313639;
+    overflow-x: hidden;
+    @apply font-sans antialiased;
   }
 
   .dark body,
   body.dark {
-    @apply bg-qac-950 text-qac-100;
+    background-color: #1c1c1f !important;
+    color: #eeeef0 !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -19,7 +26,7 @@
   }
 
   ::selection {
-    @apply bg-amber-200 text-qac-900;
+    @apply bg-amber-200 text-qac-900 dark:text-white;
   }
   
   .dark ::selection {
@@ -38,7 +45,7 @@
   }
 
   .card {
-    @apply bg-white border border-qac-100 rounded-2xl shadow-glass;
+    @apply bg-white dark:bg-qac-900/60 border border-qac-100 dark:border-qac-800 rounded-2xl shadow-glass;
   }
 
   .dark .card {
@@ -81,7 +88,7 @@
 
   .btn-outline {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
-           border-2 border-qac-200 text-qac-900
+           border-2 border-qac-200 dark:border-qac-700 text-qac-900 dark:text-white
            bg-white/50 backdrop-blur-sm
            hover:border-amber-400 hover:bg-amber-50/50 hover:text-amber-700
            focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2
@@ -94,7 +101,7 @@
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-qac-900 mb-4;
+    @apply text-3xl md:text-4xl font-bold text-qac-900 dark:text-white mb-4;
   }
 
   .dark .section-title {
@@ -102,7 +109,7 @@
   }
 
   .section-subtitle {
-    @apply text-lg text-qac-500 max-w-2xl mx-auto;
+    @apply text-lg text-qac-500 dark:text-qac-300 max-w-2xl mx-auto;
   }
 
   .dark .section-subtitle {
@@ -110,8 +117,8 @@
   }
 
   .input-field {
-    @apply w-full px-4 py-3 rounded-xl border border-qac-200 bg-white/60 backdrop-blur-sm
-           text-qac-900 placeholder-qac-400
+    @apply w-full px-4 py-3 rounded-xl border border-qac-200 dark:border-qac-700 bg-white/60 backdrop-blur-sm
+           text-qac-900 dark:text-white placeholder-qac-400
            focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-400
            transition-all duration-200;
   }
@@ -132,7 +139,7 @@
   }
 
   .label-field {
-    @apply block text-sm font-medium text-qac-700 mb-1.5;
+    @apply block text-sm font-medium text-qac-700 dark:text-qac-200 mb-1.5;
   }
 
   .dark .label-field {
@@ -152,7 +159,7 @@
   }
 
   .tag-gray {
-    @apply tag bg-qac-100 text-qac-700;
+    @apply tag bg-qac-100 dark:bg-qac-800/60 text-qac-700 dark:text-qac-200;
   }
 
   .dark .tag-gray {

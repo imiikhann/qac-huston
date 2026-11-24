@@ -28,10 +28,10 @@ export default function ServicesPage() {
 
   return (
     <>
-      <section className="bg-qac-50 py-16 lg:py-20">
+      <section className="bg-qac-50 dark:bg-qac-900/30 py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 mb-4">Our Services</h1>
-          <p className="text-xl text-qac-500 max-w-2xl mx-auto">
+          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 dark:text-white mb-4">Our Services</h1>
+          <p className="text-xl text-qac-500 dark:text-qac-300 max-w-2xl mx-auto">
             We specialize in electrical, mechanical, and special services on domestic and foreign vehicles, fleet trucks, motor homes, and food trucks.
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function ServicesPage() {
                 className={`px-6 py-3 rounded-lg font-medium text-sm capitalize transition-all ${
                   activeCategory === cat.slug
                     ? 'bg-qac-900 text-white shadow-lg'
-                    : 'bg-qac-100 text-qac-600 hover:bg-qac-200'
+                    : 'bg-qac-100 dark:bg-qac-800/60 text-qac-600 dark:text-qac-300 hover:bg-qac-200'
                 }`}
               >
                 {cat.name}
@@ -63,8 +63,8 @@ export default function ServicesPage() {
                   <div className="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-amber-100 transition-colors">
                     <Icon className="w-6 h-6 text-amber-600" />
                   </div>
-                  <h3 className="font-semibold text-qac-900 text-lg mb-2">{service.name}</h3>
-                  <p className="text-sm text-qac-500 mb-4">{service.description}</p>
+                  <h3 className="font-semibold text-qac-900 dark:text-white text-lg mb-2">{service.name}</h3>
+                  <p className="text-sm text-qac-500 dark:text-qac-300 mb-4">{service.description}</p>
                   {service.price_range && (
                     <span className="tag-amber text-xs">{service.price_range}</span>
                   )}

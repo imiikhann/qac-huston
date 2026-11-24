@@ -39,7 +39,7 @@ return new class extends Migration
             [
                 'id' => 'walkin',
                 'label' => 'Walk-In',
-                'content' => 'We welcome walk-in customers who may need a flat tire replacement, dead battery service, or towing assistance.',
+                'content' => 'Although we primarily work by appointment, we do welcome walk-in customers. We aim to do whatever we can to help.',
             ],
         ];
 

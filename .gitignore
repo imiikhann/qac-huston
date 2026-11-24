@@ -7,3 +7,6 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# Local server logs (never deploy)
+*.log

@@ -19,10 +19,10 @@ const reasons = [
 export default function WhyQACPage() {
   return (
     <>
-      <section className="bg-qac-50 py-16 lg:py-20">
+      <section className="bg-qac-50 dark:bg-qac-900/30 py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 mb-4">Why Choose QAC?</h1>
-          <p className="text-xl text-qac-500 max-w-2xl mx-auto">
+          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 dark:text-white mb-4">Why Choose QAC?</h1>
+          <p className="text-xl text-qac-500 dark:text-qac-300 max-w-2xl mx-auto">
             We bring transparency, trust, and quality to every repair.
           </p>
         </div>
@@ -42,8 +42,8 @@ export default function WhyQACPage() {
                     </div>
                     <div className={`w-full sm:w-1/2 pl-14 sm:pl-0 ${left ? 'sm:pr-14' : 'sm:pl-14'}`}>
                       <div className="card hover:shadow-xl hover:shadow-qac-900/5 transition-shadow">
-                        <h3 className="font-semibold text-qac-900 mb-2">{reason.title}</h3>
-                        <p className="text-sm text-qac-500">{reason.desc}</p>
+                        <h3 className="font-semibold text-qac-900 dark:text-white mb-2">{reason.title}</h3>
+                        <p className="text-sm text-qac-500 dark:text-qac-300">{reason.desc}</p>
                       </div>
                     </div>
                   </div>

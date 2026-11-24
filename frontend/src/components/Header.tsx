@@ -42,7 +42,7 @@ export default function Header() {
 
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-xl text-qac-500 dark:text-qac-400 hover:bg-qac-100 dark:hover:bg-white/10 transition-all"
+              className="p-2.5 rounded-xl text-qac-500 dark:text-qac-300 hover:bg-qac-100 dark:hover:bg-white/10 transition-all"
               aria-label="Toggle dark mode"
             >
               {theme === 'dark' ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
@@ -50,7 +50,7 @@ export default function Header() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2.5 rounded-xl text-qac-500 dark:text-qac-400 hover:bg-qac-100 dark:hover:bg-white/10"
+              className="lg:hidden p-2.5 rounded-xl text-qac-500 dark:text-qac-300 hover:bg-qac-100 dark:hover:bg-white/10"
             >
               {mobileOpen ? <XMarkIcon className="w-5 h-5" /> : <Bars3Icon className="w-5 h-5" />}
             </button>

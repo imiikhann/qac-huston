@@ -62,12 +62,12 @@ function EnrollForm() {
   if (submitted) {
     return (
       <section className="py-20">
-        <div className="max-w-lg mx-auto px-4 text-center">
+        <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckIcon className="w-8 h-8 text-green-600" />
           </div>
-          <h2 className="text-2xl font-bold text-qac-900 mb-2">Enrollment Request Submitted!</h2>
-          <p className="text-qac-500 mb-6">
+          <h2 className="text-2xl font-bold text-qac-900 dark:text-white mb-2">Enrollment Request Submitted!</h2>
+          <p className="text-qac-500 dark:text-qac-300 mb-6">
             Thank you for choosing {selected?.name || 'our membership program'}. We&apos;ve received your
             request and will confirm your membership shortly. You can also call us at (832) 896-3865.
           </p>
@@ -79,10 +79,10 @@ function EnrollForm() {
 
   return (
     <>
-      <section className="bg-qac-50 py-16 lg:py-20">
+      <section className="bg-qac-50 dark:bg-qac-900/30 py-16 lg:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 mb-4">Enroll in a Membership</h1>
-          <p className="text-xl text-qac-500">Join the QAC Houston family and start enjoying exclusive benefits.</p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-qac-900 dark:text-white mb-4">Enroll in a Membership</h1>
+          <p className="text-xl text-qac-500 dark:text-qac-300">Join the QAC Houston family and start enjoying exclusive benefits.</p>
         </div>
       </section>
 
@@ -122,8 +122,8 @@ function EnrollForm() {
                   onChange={(e) => setForm({ ...form, customer: { ...form.customer, phone: e.target.value } })} />
               </div>
 
-              <div className="border-t border-qac-200 pt-6 mt-2">
-                <h3 className="text-base font-bold text-qac-900 mb-4">Vehicle Details (optional)</h3>
+              <div className="border-t border-qac-200 dark:border-qac-700 pt-6 mt-2">
+                <h3 className="text-base font-bold text-qac-900 dark:text-white mb-4">Vehicle Details (optional)</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="label-field">Make</label>
@@ -163,7 +163,7 @@ function EnrollForm() {
 
 export default function EnrollPage() {
   return (
-    <Suspense fallback={<div className="py-40 text-center text-qac-500">Loading...</div>}>
+    <Suspense fallback={<div className="py-40 text-center text-qac-500 dark:text-qac-300">Loading...</div>}>
       <EnrollForm />
     </Suspense>
   )

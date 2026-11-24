@@ -64,7 +64,7 @@ const defaultClienteleTabs = [
   { id: 'fleet', label: 'Fleet', content: 'We provide regular services to fleet companies involved in delivery services, logistics, and health services. Our high standards of quality and attention to detail help prevent breakdowns during deliveries.', icon: TruckIcon },
   { id: 'commercial', label: 'Commercial', content: 'We service a variety of commercial clients, including buses, box trucks, food trucks, forklifts, and work vans (including 15-seaters).', icon: ShieldCheckIcon },
   { id: 'luxury', label: 'Luxury', content: 'We offer specialized repairs for premium brands, including Alfa Romeo, BMW, Ferrari, Maserati, Mercedes, Porsche, Range Rover, and Volvo.', icon: TrophyIcon },
-  { id: 'walkin', label: 'Walk-In', content: 'We welcome walk-in customers who may need a flat tire replacement, dead battery service, or towing assistance.', icon: HeartIcon },
+  { id: 'walkin', label: 'Walk-In', content: 'Although we primarily work by appointment, we do welcome walk-in customers. We aim to do whatever we can to help.', icon: HeartIcon },
 ]
 
 const defaultCategories: ServiceCategory[] = [
@@ -232,19 +232,12 @@ export default function HomePage() {
         ))}
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-sm font-medium mb-8">
-              <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
-              {heroSlides[activeIndex]?.subtitle || 'Over 10 Years of Quality Auto Service'}
-            </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
               {heroSlides[activeIndex]?.title || 'Quality Auto Service'}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">You Can Trust</span>
             </h1>
-            <p className="text-lg text-white/70 max-w-xl mb-10">
-              {heroSlides[activeIndex]?.subtitle || 'Expert diagnostics, repairs, and maintenance for all makes and models.'}
-            </p>
             <div className="flex flex-wrap gap-4">
-              <Link href={heroSlides[activeIndex]?.cta_link || '/book'} className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-qac-900 bg-amber-gradient shadow-xl shadow-amber-500/30 hover:shadow-2xl hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 text-lg">
+              <Link href={heroSlides[activeIndex]?.cta_link || '/book'} className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-qac-900 dark:text-white bg-amber-gradient shadow-xl shadow-amber-500/30 hover:shadow-2xl hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 text-lg">
                 {heroSlides[activeIndex]?.cta_text || 'Book Appointment'}
                 <ArrowRightIcon className="w-5 h-5" />
               </Link>
@@ -268,7 +261,7 @@ export default function HomePage() {
           {stats.map((stat: { value: string; label: string }) => (
             <div key={stat.label} className="p-6 text-center">
               <p className="text-3xl font-bold text-transparent bg-clip-text bg-amber-gradient">{stat.value}</p>
-              <p className="text-sm text-qac-500 dark:text-qac-400 mt-1">{stat.label}</p>
+              <p className="text-sm text-qac-500 dark:text-qac-300 mt-1">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -310,7 +303,7 @@ export default function HomePage() {
                     <Icon className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="font-semibold text-qac-900 dark:text-white text-lg mb-2">{service.name}</h3>
-                  <p className="text-sm text-qac-500 dark:text-qac-400 mb-4 line-clamp-2 leading-relaxed">{service.description}</p>
+                  <p className="text-sm text-qac-500 dark:text-qac-300 mb-4 line-clamp-2 leading-relaxed">{service.description}</p>
                   {service.price_range && (
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
                       {service.price_range}
@@ -348,9 +341,9 @@ export default function HomePage() {
               <div className={`relative h-full max-w-7xl mx-auto px-4 flex items-center ${imgContent.align === 'right' ? 'justify-end' : ''}`}>
                 <div className={imgContent.align === 'right' ? 'max-w-xl text-right' : 'max-w-xl'}>
                   <h2 className="text-4xl font-bold text-white mb-4">{imgBrk.title || 'Precision Service for Every Vehicle'}</h2>
-                  <p className="text-white/70 text-lg mb-6">{imgBrk.subtitle || 'From luxury imports to heavy-duty fleet trucks, our certified technicians deliver exceptional care.'}</p>
+                  <p className="text-white/90 text-lg mb-6">{imgBrk.subtitle || 'From luxury imports to heavy-duty fleet trucks, our certified technicians deliver exceptional care.'}</p>
                   {imgContent.button_text && (
-                    <Link href={imgContent.button_link || '/services'} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-white text-qac-900 hover:bg-amber-50 transition-all duration-200">
+                    <Link href={imgContent.button_link || '/services'} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-white dark:bg-qac-900/60 text-qac-900 dark:text-white hover:bg-amber-50 transition-all duration-200">
                       {imgContent.button_text}
                       <ArrowRightIcon className="w-4 h-4" />
                     </Link>
@@ -395,7 +388,7 @@ export default function HomePage() {
 
           <div className="max-w-4xl mx-auto grid md:grid-cols-5 gap-4">
             <div className="md:col-span-3 glass-card p-8 md:p-10">
-              <span className="text-6xl text-amber-300/30 dark:text-amber-500/10 font-serif leading-none">&ldquo;</span>
+              <span className="text-6xl text-amber-300/30 dark:text-amber-500/30 font-serif leading-none">&ldquo;</span>
               <p className="text-qac-700 dark:text-qac-300 leading-relaxed text-lg relative -mt-4">
                 {activeClienteleTab?.content}
               </p>
@@ -405,7 +398,7 @@ export default function HomePage() {
                 <UsersIcon className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-semibold text-qac-900 dark:text-white mb-1">{clienteleCardTitle}</h3>
-              <p className="text-sm text-qac-500 dark:text-qac-400">{clienteleCardText}</p>
+              <p className="text-sm text-qac-500 dark:text-qac-300">{clienteleCardText}</p>
             </div>
           </div>
         </div>
@@ -480,7 +473,7 @@ export default function HomePage() {
                 ))}
               </div>
               <span className="text-3xl font-bold text-qac-900 dark:text-white">5.0</span>
-              <span className="text-qac-500 dark:text-qac-400">(10 reviews)</span>
+              <span className="text-qac-500 dark:text-qac-300">(10 reviews)</span>
             </div>
           </div>
 
@@ -513,7 +506,7 @@ export default function HomePage() {
                     <div className="w-16 h-16 bg-gradient-to-br from-qac-100 to-qac-200 dark:from-qac-800 dark:to-qac-700 rounded-2xl flex items-center justify-center mb-4">
                       <StarIcon className="w-8 h-8 text-amber-500" />
                     </div>
-                    <p className="text-qac-500 dark:text-qac-400 text-sm mb-4">Share your experience</p>
+                    <p className="text-qac-500 dark:text-qac-300 text-sm mb-4">Share your experience</p>
                     <a href="https://search.google.com/local/writereview?placeid=ChIJsbVw5J7RQIYRGK3jJfimU8g" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm">
                       Write a Review
                     </a>
@@ -576,7 +569,7 @@ export default function HomePage() {
             {ctaSubtitle}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href={ctaContent?.book_link || '/book'} className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-qac-900 bg-amber-gradient shadow-xl shadow-amber-500/30 hover:shadow-2xl hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 text-lg">
+            <Link href={ctaContent?.book_link || '/book'} className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-qac-900 dark:text-white bg-amber-gradient shadow-xl shadow-amber-500/30 hover:shadow-2xl hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 text-lg">
               {ctaContent?.book_text || 'Book Appointment'}
               <ArrowRightIcon className="w-5 h-5" />
             </Link>
@@ -585,7 +578,7 @@ export default function HomePage() {
               Call {ctaPhone}
             </a>
           </div>
-          <div className="flex flex-wrap justify-center gap-6 mt-10 text-sm text-qac-500">
+          <div className="flex flex-wrap justify-center gap-6 mt-10 text-sm text-qac-500 dark:text-qac-300">
             <span className="inline-flex items-center gap-2"><MapPinIcon className="w-4 h-4 text-amber-500" /> 9934 Jones Rd B5, Houston, TX</span>
             <span className="inline-flex items-center gap-2"><ClockIcon className="w-4 h-4 text-amber-500" /> Mon-Thu 9-6 | Fri-Sat 9-1</span>
           </div>
@@ -602,7 +595,7 @@ export default function HomePage() {
 
           <div className="max-w-3xl mx-auto">
             {faqs.length === 0 ? (
-              <p className="text-center text-qac-500 dark:text-qac-400">No FAQs yet.</p>
+              <p className="text-center text-qac-500 dark:text-qac-300">No FAQs yet.</p>
             ) : (
               <div className="space-y-3">
                 {faqs.map((faq) => (
